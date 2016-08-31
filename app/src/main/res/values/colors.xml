@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#212121</color> <!--Grey 900-->
-  <color name="colorPrimaryDark">#000000</color> <!--Black-->
-  <color name="colorAccent">#FF6D00</color> <!--Orange A700-->
+  <color name="colorPrimary">@color/grey_900</color>
+  <color name="colorPrimaryDark">@color/black</color>
+  <color name="colorAccent">@color/orange_a700</color>
+
+  <color name="grey_900">#212121</color>
+  <color name="grey_600">#757575</color>
+
+  <color name="orange_a700">#FF6D00</color>
+
+  <color name="black">#000000</color>
+  <color name="white">#FFFFFF</color>
 </resources>

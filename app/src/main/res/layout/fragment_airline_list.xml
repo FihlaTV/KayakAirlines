@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorPrimary"
+      >
+    <EditText
+        android:id="@+id/airline_list_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_margin="12dp"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_search"
+        android:hint="@string/airline_list_search_hint"
+        android:inputType="textCapWords"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey_600"
+        android:textCursorDrawable="@drawable/cursor"
+        android:textSize="15sp"
+        />
+  </FrameLayout>
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/airline_list_recyclerview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
+
+</LinearLayout>

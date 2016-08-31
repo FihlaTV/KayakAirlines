@@ -11,7 +11,7 @@
     >
 
   <include
-      layout="@layout/content_airlines"
+      layout="@layout/content_airline_list"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       />
