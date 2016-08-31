@@ -11,5 +11,6 @@
 
   <string name="airline_tab_all">All</string>
   <string name="airline_tab_starred">Starred</string>
+  <string name="airline_list_title">Airline info</string>
 
 </resources>

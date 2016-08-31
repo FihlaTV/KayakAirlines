@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +31,15 @@ public class AirlineListActivity extends AppCompatActivity
   private static final Lambda[] TABS = new Lambda[]{PlaceholderFragment::newInstance, PlaceholderFragment::newInstance};
   private static final int[] TITLES = new int[]{ R.string.airline_tab_all, R.string.airline_tab_starred};
 
+  @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.airline_list_viewpager) ViewPager airlineViewPager;
   @BindView(R.id.airline_list_tablayout) TabLayout airlineTabLayout;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_airlines);
     ButterKnife.bind(this);
+    setSupportActionBar(toolbar);
 
     airlineViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
       @Override public Fragment getItem(int position) {
@@ -56,9 +56,6 @@ public class AirlineListActivity extends AppCompatActivity
     });
 
     airlineTabLayout.setupWithViewPager(airlineViewPager);
-
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
@@ -77,39 +74,15 @@ public class AirlineListActivity extends AppCompatActivity
 
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
-
   }
 
-  @Override
-  public void onBackPressed() {
+  @Override public void onBackPressed() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
     } else {
       super.onBackPressed();
     }
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.menu_main, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
-    }
-
-    return super.onOptionsItemSelected(item);
   }
 
   /**
