@@ -1,0 +1,10 @@
+{
+  __clazz: "com.r9.harmony.httpd.mobileapis.AirlineMobile",
+  code: "A2",
+  defaultName: "Astra Airlines",
+  logoURL: "/res/images/air/2x/A2.png?v=b1e3678060cf55e6816b12d265c3a651a4c7f991",
+  name: "Astra Airlines",
+  phone: "+30 2310 489 391",
+  site: "www.astra-airlines.gr",
+  usName: "Astra Airlines"
+}
