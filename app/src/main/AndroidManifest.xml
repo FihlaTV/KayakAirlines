@@ -13,7 +13,7 @@
     <activity
         android:name=".features.airlinelist.AirlineListActivity"
         android:label="@string/airline_list_title"
-        android:theme="@style/AppTheme.NoActionBar"
+        android:theme="@style/AppTheme"
         >
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -21,8 +21,10 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".features.airlinedetail.AirlineDetailActivity">
-    </activity>
+    <activity
+        android:name=".features.airlinedetail.AirlineDetailActivity"
+        android:theme="@style/AppTheme"
+        />
   </application>
 
 </manifest>
