@@ -1,4 +1,4 @@
-package com.oguzbabaoglu.kayakairlines;
+package com.oguzbabaoglu.kayakairlines.features.airlinelist;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.util.Lambda;
 
 import butterknife.BindView;
@@ -29,7 +30,7 @@ public class AirlineListActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
   private static final Lambda[] TABS = new Lambda[]{PlaceholderFragment::newInstance, PlaceholderFragment::newInstance};
-  private static final int[] TITLES = new int[]{R.string.airline_tab_all, R.string.airline_tab_starred};
+  private static final int[] TITLES = new int[]{ R.string.airline_tab_all, R.string.airline_tab_starred};
 
   @BindView(R.id.airline_list_viewpager) ViewPager airlineViewPager;
   @BindView(R.id.airline_list_tablayout) TabLayout airlineTabLayout;
