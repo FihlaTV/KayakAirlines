@@ -19,7 +19,7 @@ public abstract class Airline implements Comparable<Airline> {
   }
 
   @Override public int compareTo(@NonNull Airline airline) {
-    return displayName().compareTo(airline.displayName());
+    return displayName().compareToIgnoreCase(airline.displayName());
   }
 
   @AutoValue.Builder

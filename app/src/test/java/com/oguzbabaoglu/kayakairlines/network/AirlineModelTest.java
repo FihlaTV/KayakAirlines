@@ -1,7 +1,7 @@
 package com.oguzbabaoglu.kayakairlines.network;
 
 import com.google.gson.Gson;
-import com.oguzbabaoglu.kayakairlines.di.Dagger;
+import com.oguzbabaoglu.kayakairlines.util.Dagger;
 import com.oguzbabaoglu.kayakairlines.network.response.AirlineModel;
 
 import org.junit.Test;

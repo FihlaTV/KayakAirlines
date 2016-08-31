@@ -1,4 +1,4 @@
-package com.oguzbabaoglu.kayakairlines.features.airlinedetail;
+package com.oguzbabaoglu.kayakairlines.features.airlines.detail;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

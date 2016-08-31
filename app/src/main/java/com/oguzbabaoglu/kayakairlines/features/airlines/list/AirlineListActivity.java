@@ -1,4 +1,4 @@
-package com.oguzbabaoglu.kayakairlines.features.airlinelist;
+package com.oguzbabaoglu.kayakairlines.features.airlines.list;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;

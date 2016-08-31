@@ -7,6 +7,7 @@ import com.oguzbabaoglu.kayakairlines.util.ListUtil;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import rx.Single;
 
@@ -15,6 +16,7 @@ import rx.Single;
  * In reality airline information does not change very frequently,
  * therefore a longer term caching strategy could be used.
  */
+@Singleton // scoped as singleton for convenience (this is a single-feature app)
 public class AirlineRepository {
 
   private final KayakApi kayakApi;

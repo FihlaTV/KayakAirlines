@@ -1,4 +1,7 @@
-package com.oguzbabaoglu.kayakairlines.di;
+package com.oguzbabaoglu.kayakairlines.util;
+
+import com.oguzbabaoglu.kayakairlines.features.airlines.AirlineComponent;
+import com.oguzbabaoglu.kayakairlines.features.airlines.DaggerAirlineComponent;
 
 public enum Dagger {
   INJECTOR;
