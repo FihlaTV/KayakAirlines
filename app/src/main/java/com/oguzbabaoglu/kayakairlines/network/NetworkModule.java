@@ -17,10 +17,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class NetworkModule {
 
+  private final String baseUrl;
+
+  public NetworkModule() {
+    this(BuildConfig.BASE_URL);
+  }
+
+  public NetworkModule(String baseUrl) {
+    this.baseUrl = baseUrl;
+  }
+
+  /**
+   * Endpoint provides malformed JSON with unquoted keys.
+   * Provided Gson will have {@link GsonBuilder#setLenient()} set.
+   */
   @Singleton
   @Provides public Gson gson() {
     return new GsonBuilder()
         .registerTypeAdapterFactory(KayakTypeAdapterFactory.create())
+        .setLenient() // Required for handling unquoted keys
         .create();
   }
 
@@ -40,7 +55,7 @@ public class NetworkModule {
   @Singleton
   @Provides public Retrofit retrofit(OkHttpClient httpClient, Gson gson) {
     return new Retrofit.Builder()
-        .baseUrl(BuildConfig.BASE_URL)
+        .baseUrl(baseUrl)
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

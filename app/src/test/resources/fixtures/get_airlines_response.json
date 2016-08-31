@@ -1,0 +1,32 @@
+[
+  {
+    __clazz: "com.r9.harmony.httpd.mobileapis.AirlineMobile",
+    code: "A2",
+    defaultName: "Astra Airlines",
+    logoURL: "/res/images/air/2x/A2.png?v=b1e3678060cf55e6816b12d265c3a651a4c7f991",
+    name: "Astra Airlines",
+    phone: "+30 2310 489 391",
+    site: "www.astra-airlines.gr",
+    usName: "Astra Airlines"
+  },
+  {
+    __clazz: "com.r9.harmony.httpd.mobileapis.AirlineMobile",
+    code: "A3",
+    defaultName: "Aegean Airlines S.A.",
+    logoURL: "/res/images/air/2x/A3.png?v=d78818ae87be5b87dd4e61b3a0acf95eedf6631e",
+    name: "Aegean Airlines",
+    phone: "1 (855) 323-4326",
+    site: "en.aegeanair.com/Default.aspx",
+    usName: "Aegean Airlines S.A."
+  },
+  {
+    __clazz: "com.r9.harmony.httpd.mobileapis.AirlineMobile",
+    code: "A5",
+    defaultName: "HOP!",
+    logoURL: "/res/images/air/2x/A5.png?v=7feda8827624980db3b1aa9f5316a14b1d20d264",
+    name: "HOP!",
+    phone: "",
+    site: "www.hop.com",
+    usName: "HOP!"
+  }
+]
