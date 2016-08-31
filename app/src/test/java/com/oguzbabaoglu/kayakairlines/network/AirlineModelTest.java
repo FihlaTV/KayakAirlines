@@ -1,5 +1,7 @@
 package com.oguzbabaoglu.kayakairlines.network;
 
+import com.google.gson.Gson;
+import com.oguzbabaoglu.kayakairlines.di.Dagger;
 import com.oguzbabaoglu.kayakairlines.network.response.AirlineModel;
 
 import org.junit.Test;
@@ -11,8 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AirlineModelTest {
 
   @Test public void testParse() {
+    Gson gson = Dagger.INJECTOR.airlineComponent().gson();
     String json = TestResourceLoader.load("fixtures/airline_model.json");
-    AirlineModel model = GsonProvider.get().fromJson(json, AirlineModel.class);
+    AirlineModel model = gson.fromJson(json, AirlineModel.class);
 
     assertThat(model.clazz()).isEqualTo("com.r9.harmony.httpd.mobileapis.AirlineMobile");
     assertThat(model.code()).isEqualTo("A2");

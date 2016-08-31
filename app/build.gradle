@@ -24,9 +24,15 @@ android {
     versionName "1.0"
   }
   buildTypes {
+    debug {
+      minifyEnabled false
+
+      buildConfigField 'String', 'BASE_URL', '\"https://www.kayak.com/\"'
+    }
     release {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+      buildConfigField 'String', 'BASE_URL', '\"https://www.kayak.com/\"'
     }
   }
   compileOptions {
@@ -42,6 +48,10 @@ dependencies {
   // RxJava
   compile "io.reactivex:rxjava:1.1.5"
   compile "io.reactivex:rxandroid:1.2.0@aar"
+
+  // Dagger2
+  compile "com.google.dagger:dagger:2.5"
+  apt "com.google.dagger:dagger-compiler:2.5"
 
   // AutoValue
   provided "org.glassfish:javax.annotation:10.0-b28@jar"
@@ -61,6 +71,7 @@ dependencies {
   compile "com.google.code.gson:gson:2.7"
   compile "com.squareup.retrofit2:retrofit:2.1.0@jar"
   compile "com.squareup.retrofit2:adapter-rxjava:2.1.0@jar"
+  compile "com.squareup.retrofit2:converter-gson:2.1.0@jar"
 
   // Test
   testCompile "junit:junit:4.12"
