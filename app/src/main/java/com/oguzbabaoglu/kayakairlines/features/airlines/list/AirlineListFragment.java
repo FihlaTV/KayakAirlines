@@ -5,15 +5,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.util.Dagger;
 import com.oguzbabaoglu.kayakairlines.util.DividerItemDecoration;
 import com.oguzbabaoglu.kayakairlines.util.ListUtil;
+import com.oguzbabaoglu.kayakairlines.util.SimpleTextWatcher;
 
 import java.util.List;
 
@@ -26,9 +29,12 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
 
   private static final String KEY_AIRLINES = "KEY_AIRLINES";
 
+  @BindView(R.id.airline_list_search) EditText airlineSearchText;
   @BindView(R.id.airline_list_recyclerview) RecyclerView airlineRecyclerView;
 
   @Inject AirlineListPresenter presenter;
+
+  private AirlineListAdapter listAdapter;
 
   public static AirlineListFragment newInstance(List<Airline> airlines) {
     Bundle args = new Bundle();
@@ -56,10 +62,17 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
     airlineRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     airlineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
-    AirlineListAdapter adapter = new AirlineListAdapter(position -> {
+    airlineSearchText.addTextChangedListener(new SimpleTextWatcher() {
+      @Override public void afterTextChanged(Editable s) {
+        presenter.onFilterTextChanged(s.toString());
+      }
     });
+    listAdapter = new AirlineListAdapter(getArguments().getParcelableArrayList(KEY_AIRLINES),
+        airline -> {});
+    airlineRecyclerView.setAdapter(listAdapter);
+  }
 
-    adapter.setAirlines(getArguments().getParcelableArrayList(KEY_AIRLINES));
-    airlineRecyclerView.setAdapter(adapter);
+  @Override public void filterAirlines(String constraint) {
+    listAdapter.getFilter().filter(constraint);
   }
 }

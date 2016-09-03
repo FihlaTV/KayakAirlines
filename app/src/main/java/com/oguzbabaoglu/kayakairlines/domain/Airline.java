@@ -24,6 +24,11 @@ public abstract class Airline implements Comparable<Airline>, Parcelable {
     return displayName().compareToIgnoreCase(airline.displayName());
   }
 
+  public boolean matches(CharSequence filter) {
+    String match = filter.toString().toLowerCase();
+    return displayName().toLowerCase().contains(match) || code().toLowerCase().contains(match);
+  }
+
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder displayName(String displayName);
