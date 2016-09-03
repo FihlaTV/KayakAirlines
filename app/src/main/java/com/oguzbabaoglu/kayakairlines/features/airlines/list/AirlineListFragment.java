@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
+import com.oguzbabaoglu.kayakairlines.features.airlines.detail.AirlineDetailActivity;
 import com.oguzbabaoglu.kayakairlines.util.Dagger;
 import com.oguzbabaoglu.kayakairlines.util.DividerItemDecoration;
 import com.oguzbabaoglu.kayakairlines.util.ListUtil;
@@ -80,5 +81,9 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
 
   @Override public void clearFilter() {
     airlineSearchText.setText("");
+  }
+
+  @Override public void displayAirlineDetailView(Airline airline) {
+    startActivity(AirlineDetailActivity.newIntent(getContext()));
   }
 }

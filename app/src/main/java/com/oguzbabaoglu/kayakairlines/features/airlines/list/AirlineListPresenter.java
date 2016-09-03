@@ -25,5 +25,6 @@ public class AirlineListPresenter {
   }
 
   public void onAirlineClick(Airline airline) {
+    view.displayAirlineDetailView(airline);
   }
 }

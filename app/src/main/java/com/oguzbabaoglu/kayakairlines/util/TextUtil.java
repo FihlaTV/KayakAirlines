@@ -10,6 +10,10 @@ public final class TextUtil {
   private TextUtil() {
   }
 
+  /**
+   * @return a {@link TextWatcher} that will call the provided action
+   * on {@link TextWatcher#afterTextChanged(Editable)}.
+   */
   public static TextWatcher doAfter(Action1<String> action) {
     return new TextWatcher() {
       @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -40,7 +40,7 @@ public class AirlineInfoActivity extends AppCompatActivity implements AirlineInf
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_airline_list);
+    setContentView(R.layout.activity_airline_info);
     ButterKnife.bind(this);
     setSupportActionBar(toolbar);
     Dagger.INJECTOR.airlineComponent().inject(this);

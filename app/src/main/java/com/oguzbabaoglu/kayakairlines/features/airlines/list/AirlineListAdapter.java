@@ -76,6 +76,7 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     public AirlineHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
+      itemView.setOnClickListener(this);
     }
 
     @Override public void onClick(View v) {
