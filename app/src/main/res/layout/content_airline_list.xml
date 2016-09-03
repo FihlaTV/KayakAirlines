@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".features.airlines.list.AirlineListActivity"
+    tools:context=".features.airlines.AirlineActivity"
     >
 
   <android.support.design.widget.AppBarLayout

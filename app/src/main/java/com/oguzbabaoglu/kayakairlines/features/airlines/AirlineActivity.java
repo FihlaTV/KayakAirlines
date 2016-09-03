@@ -1,4 +1,4 @@
-package com.oguzbabaoglu.kayakairlines.features.airlines.list;
+package com.oguzbabaoglu.kayakairlines.features.airlines;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,15 +14,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.oguzbabaoglu.kayakairlines.R;
+import com.oguzbabaoglu.kayakairlines.features.airlines.list.AirlineListFragment;
 import com.oguzbabaoglu.kayakairlines.util.Lambda;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AirlineListActivity extends AppCompatActivity
+public class AirlineActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
-  private static final Lambda[] TABS = new Lambda[]{AirlineListFragment::newInstance, AirlineListFragment::newInstance};
+  private static final Lambda[] TABS = new Lambda[]{ AirlineListFragment::newInstance, AirlineListFragment::newInstance};
   private static final int[] TITLES = new int[]{ R.string.airline_tab_all, R.string.airline_tab_starred};
 
   @BindView(R.id.toolbar) Toolbar toolbar;
