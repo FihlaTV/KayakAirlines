@@ -43,7 +43,7 @@ public class AirlineRepositoryTest {
         .name(name)
         .code("test")
         .usName(name)
-        .logoURL("test")
+        .logoUrl("test")
         .build();
   }
 

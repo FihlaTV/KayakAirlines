@@ -1,6 +1,6 @@
 package com.oguzbabaoglu.kayakairlines.network;
 
-import com.oguzbabaoglu.kayakairlines.di.DaggerAirlineComponent;
+import com.oguzbabaoglu.kayakairlines.features.airlines.DaggerAirlineComponent;
 import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
 import org.junit.Before;
