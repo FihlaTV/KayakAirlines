@@ -3,19 +3,19 @@ package com.oguzbabaoglu.kayakairlines.util;
 import com.oguzbabaoglu.kayakairlines.features.airlines.AirlineComponent;
 import com.oguzbabaoglu.kayakairlines.features.airlines.DaggerAirlineComponent;
 
+/**
+ * Initiates the main component on first injection call. Thread-safe.
+ */
 public enum Dagger {
   INJECTOR;
 
-  private AirlineComponent airlineComponent;
+  private final AirlineComponent airlineComponent;
 
-  private void init() {
-    airlineComponent = DaggerAirlineComponent.create();
+  Dagger() {
+    this.airlineComponent = DaggerAirlineComponent.create();
   }
 
   public AirlineComponent airlineComponent() {
-    if (airlineComponent == null) {
-      init();
-    }
     return airlineComponent;
   }
 }
