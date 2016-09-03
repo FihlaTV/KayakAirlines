@@ -13,7 +13,7 @@ public abstract class AirlineResponse {
   @SerializedName("__clazz") public abstract String clazz();
   @SerializedName("code") public abstract String code();
   @SerializedName("defaultName") public abstract String defaultName();
-  @SerializedName("logoURL") public abstract String logoURL();
+  @SerializedName("logoURL") public abstract String logoUrl();
   @SerializedName("name") public abstract String name();
   @Nullable @SerializedName("phone") public abstract String phone();
   @Nullable @SerializedName("site") public abstract String site();
@@ -32,7 +32,7 @@ public abstract class AirlineResponse {
     public abstract Builder clazz(String clazz);
     public abstract Builder code(String code);
     public abstract Builder defaultName(String defaultName);
-    public abstract Builder logoURL(String logoURL);
+    public abstract Builder logoUrl(String logoUrl);
     public abstract Builder name(String name);
     public abstract Builder phone(String phone);
     public abstract Builder site(String site);

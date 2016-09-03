@@ -5,12 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.AirlineHolder> {
 
@@ -43,6 +48,8 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     holder.airlineTextView.setCompoundDrawablesWithIntrinsicBounds(
         0, 0, airline.isStarred() ? R.drawable.ic_star : 0, 0
     );
+    int logoSize = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_size);
+    Picasso.with(context).load(airline.logoUrl()).resize(logoSize, logoSize).into(holder.airlineLogoImageView);
   }
 
   @Override public int getItemCount() {
@@ -51,11 +58,13 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
 
   static class AirlineHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     OnItemClickListener listener;
-    TextView airlineTextView;
+
+    @BindView(R.id.airline_item_text) TextView airlineTextView;
+    @BindView(R.id.airline_item_image) ImageView airlineLogoImageView;
 
     public AirlineHolder(View itemView, OnItemClickListener listener) {
       super(itemView);
-      this.airlineTextView = (TextView) itemView;
+      ButterKnife.bind(this, itemView);
       this.listener = listener;
     }
 

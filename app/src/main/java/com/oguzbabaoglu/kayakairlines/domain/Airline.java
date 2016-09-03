@@ -10,6 +10,7 @@ public abstract class Airline implements Comparable<Airline> {
 
   public abstract String displayName();
   public abstract String code();
+  public abstract String logoUrl();
   @Nullable public abstract String phone();
   @Nullable public abstract String website();
   public abstract boolean isStarred();
@@ -26,6 +27,7 @@ public abstract class Airline implements Comparable<Airline> {
   public abstract static class Builder {
     public abstract Builder displayName(String displayName);
     public abstract Builder code(String code);
+    public abstract Builder logoUrl(String logoUrl);
     public abstract Builder phone(String phone);
     public abstract Builder website(String website);
     public abstract Builder isStarred(boolean starred);

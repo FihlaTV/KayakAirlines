@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/clickable_list_item_padding"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/clickable_list_item_padding"
-    android:textColor="@color/colorPrimary"
-    android:textSize="15sp"
-    tools:text="Air Canada (AC)"
-    />
+    android:orientation="horizontal"
+    >
+  <ImageView
+      android:id="@+id/airline_item_image"
+      android:layout_width="@dimen/airline_logo_size"
+      android:layout_height="@dimen/airline_logo_size"
+      android:layout_gravity="center_vertical"
+      android:layout_marginLeft="@dimen/activity_horizontal_margin"
+      android:contentDescription="@string/airline_item_image_description"
+      />
+  <TextView
+      android:id="@+id/airline_item_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="@dimen/clickable_list_item_padding"
+      android:paddingLeft="@dimen/activity_horizontal_margin"
+      android:paddingRight="@dimen/activity_horizontal_margin"
+      android:paddingTop="@dimen/clickable_list_item_padding"
+      android:textColor="@color/colorPrimary"
+      android:textSize="15sp"
+      tools:text="Air Canada (AC)"
+      />
+
+</LinearLayout>
+
