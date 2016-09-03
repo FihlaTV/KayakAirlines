@@ -3,17 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     >
-  <FrameLayout
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/colorPrimary"
+      android:orientation="horizontal"
       >
     <EditText
         android:id="@+id/airline_list_search"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:layout_marginBottom="4dp"
@@ -28,7 +31,18 @@
         android:textCursorDrawable="@drawable/cursor"
         android:textSize="15sp"
         />
-  </FrameLayout>
+
+    <ImageView
+        android:id="@+id/airline_list_search_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:padding="12dp"
+        android:src="@drawable/ic_close"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        />
+  </LinearLayout>
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/airline_list_recyclerview"

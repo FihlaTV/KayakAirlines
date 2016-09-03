@@ -1,5 +1,7 @@
 package com.oguzbabaoglu.kayakairlines.features.airlines.list;
 
+import com.oguzbabaoglu.kayakairlines.domain.Airline;
+
 import javax.inject.Inject;
 
 public class AirlineListPresenter {
@@ -15,5 +17,13 @@ public class AirlineListPresenter {
 
   public void onFilterTextChanged(String filter) {
     view.filterAirlines(filter);
+    view.showSearchClearButton(!filter.isEmpty());
+  }
+
+  public void onSearchClearClick() {
+    view.clearFilter();
+  }
+
+  public void onAirlineClick(Airline airline) {
   }
 }
