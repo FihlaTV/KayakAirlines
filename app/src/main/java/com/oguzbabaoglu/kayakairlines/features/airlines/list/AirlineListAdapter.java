@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
+import com.oguzbabaoglu.kayakairlines.util.RemoveWhiteTransformation;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
@@ -24,11 +26,13 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
   }
 
   private final OnItemClickListener listener;
+  private final Transformation logoTransformation;
 
   private List<Airline> airlines;
 
   public AirlineListAdapter(OnItemClickListener listener) {
     this.listener = listener;
+    this.logoTransformation = new RemoveWhiteTransformation();
   }
 
   public void setAirlines(List<Airline> airlines) {
@@ -48,8 +52,13 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     holder.airlineTextView.setCompoundDrawablesWithIntrinsicBounds(
         0, 0, airline.isStarred() ? R.drawable.ic_star : 0, 0
     );
-    int logoSize = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_size);
-    Picasso.with(context).load(airline.logoUrl()).resize(logoSize, logoSize).into(holder.airlineLogoImageView);
+    int logoWidth = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_width);
+    int logoHeight = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_height);
+    Picasso.with(context).load(airline.logoUrl())
+        .placeholder(R.drawable.airline_logo_placeholder)
+        .resize(logoWidth, logoHeight)
+        .transform(logoTransformation)
+        .into(holder.airlineLogoImageView);
   }
 
   @Override public int getItemCount() {
