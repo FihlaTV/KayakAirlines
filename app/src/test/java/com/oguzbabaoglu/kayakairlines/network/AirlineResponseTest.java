@@ -6,7 +6,7 @@ import com.oguzbabaoglu.kayakairlines.util.Dagger;
 
 import org.junit.Test;
 
-import util.TestResourceLoader;
+import testutil.TestResourceLoader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

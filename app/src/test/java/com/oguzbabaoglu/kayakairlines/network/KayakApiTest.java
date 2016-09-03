@@ -11,10 +11,10 @@ import java.util.List;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-import util.TestResourceLoader;
+import testutil.TestResourceLoader;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static util.AssertRecordedRequest.assertRecordedRequest;
+import static testutil.AssertRecordedRequest.assertRecordedRequest;
 
 public class KayakApiTest {
 

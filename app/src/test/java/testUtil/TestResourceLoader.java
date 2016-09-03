@@ -1,4 +1,4 @@
-package util;
+package testutil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
