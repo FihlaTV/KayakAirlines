@@ -1,12 +1,13 @@
 package com.oguzbabaoglu.kayakairlines.domain;
 
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-public abstract class Airline implements Comparable<Airline> {
+public abstract class Airline implements Comparable<Airline>, Parcelable {
 
   public abstract String displayName();
   public abstract String code();

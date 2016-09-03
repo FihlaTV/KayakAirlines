@@ -13,6 +13,7 @@ import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.util.Dagger;
 import com.oguzbabaoglu.kayakairlines.util.DividerItemDecoration;
+import com.oguzbabaoglu.kayakairlines.util.ListUtil;
 
 import java.util.List;
 
@@ -23,12 +24,15 @@ import butterknife.ButterKnife;
 
 public class AirlineListFragment extends Fragment implements AirlineListView {
 
+  private static final String KEY_AIRLINES = "KEY_AIRLINES";
+
   @BindView(R.id.airline_list_recyclerview) RecyclerView airlineRecyclerView;
 
   @Inject AirlineListPresenter presenter;
 
-  public static AirlineListFragment newInstance() {
+  public static AirlineListFragment newInstance(List<Airline> airlines) {
     Bundle args = new Bundle();
+    args.putParcelableArrayList(KEY_AIRLINES, ListUtil.asArrayList(airlines));
     AirlineListFragment fragment = new AirlineListFragment();
     fragment.setArguments(args);
     return fragment;
@@ -52,14 +56,10 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
     airlineRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     airlineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
-    presenter.init();
-  }
-
-  @Override public void updateContent(List<Airline> airlines) {
     AirlineListAdapter adapter = new AirlineListAdapter(position -> {
     });
 
-    adapter.setAirlines(airlines);
+    adapter.setAirlines(getArguments().getParcelableArrayList(KEY_AIRLINES));
     airlineRecyclerView.setAdapter(adapter);
   }
 }

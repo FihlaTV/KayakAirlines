@@ -14,52 +14,47 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.oguzbabaoglu.kayakairlines.R;
+import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.features.airlines.list.AirlineListFragment;
-import com.oguzbabaoglu.kayakairlines.util.Lambda;
+import com.oguzbabaoglu.kayakairlines.util.Dagger;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AirlineActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+public class AirlineInfoActivity extends AppCompatActivity
+    implements NavigationView.OnNavigationItemSelectedListener, AirlineInfoView {
 
-  private static final Lambda[] TABS = new Lambda[]{ AirlineListFragment::newInstance, AirlineListFragment::newInstance};
-  private static final int[] TITLES = new int[]{ R.string.airline_tab_all, R.string.airline_tab_starred};
+  private static final int INDEX_ALL = 0;
+  private static final int TAB_COUNT = 2;
 
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.airline_list_viewpager) ViewPager airlineViewPager;
   @BindView(R.id.airline_list_tablayout) TabLayout airlineTabLayout;
+
+  @Inject AirlineInfoPresenter presenter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_airline_list);
     ButterKnife.bind(this);
     setSupportActionBar(toolbar);
+    Dagger.INJECTOR.airlineComponent().inject(this);
 
-    airlineViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-      @Override public Fragment getItem(int position) {
-        return (Fragment) TABS[position].call();
-      }
-
-      @Override public int getCount() {
-        return TABS.length;
-      }
-
-      @Override public CharSequence getPageTitle(int position) {
-        return getString(TITLES[position]);
-      }
-    });
-
-    airlineTabLayout.setupWithViewPager(airlineViewPager);
-    
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.setDrawerListener(toggle);
+    drawer.addDrawerListener(toggle);
     toggle.syncState();
 
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
+
+    presenter.setView(this);
+    presenter.init();
   }
 
   @Override public void onBackPressed() {
@@ -94,5 +89,23 @@ public class AirlineActivity extends AppCompatActivity
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  @Override public void displayListTabs(List<Airline> all, List<Airline> starred) {
+    airlineViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+      @Override public Fragment getItem(int position) {
+        return AirlineListFragment.newInstance(position == INDEX_ALL ? all : starred);
+      }
+
+      @Override public int getCount() {
+        return TAB_COUNT;
+      }
+
+      @Override public CharSequence getPageTitle(int position) {
+        return getString(position == INDEX_ALL ? R.string.airline_tab_all : R.string.airline_tab_starred);
+      }
+    });
+
+    airlineTabLayout.setupWithViewPager(airlineViewPager);
   }
 }

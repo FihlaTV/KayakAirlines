@@ -19,5 +19,6 @@ public interface AirlineComponent {
 
   KayakApi kayakApi();
 
+  void inject(AirlineInfoActivity activity);
   void inject(AirlineListFragment fragment);
 }

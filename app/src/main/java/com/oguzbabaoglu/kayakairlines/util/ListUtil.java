@@ -32,4 +32,33 @@ public final class ListUtil {
     Collections.sort(input);
     return input;
   }
+
+  /**
+   * Applies a filter function on each element of the input list.
+   */
+  public static <T> List<T> filter(List<T> input, Func1<T, Boolean> func) {
+    if (input == null || input.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<T> result = new ArrayList<>(input.size() / 2);
+    for (T item : input) {
+      if (func.call(item)) {
+        result.add(item);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Transforms any List into an ArrayList.
+   */
+  public static <T> ArrayList<T> asArrayList(List<T> input) {
+    if (input == null) {
+      return null;
+    }
+    if (input instanceof ArrayList) {
+      return (ArrayList<T>) input;
+    }
+    return new ArrayList<>(input);
+  }
 }
