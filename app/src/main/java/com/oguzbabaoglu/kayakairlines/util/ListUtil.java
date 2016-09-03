@@ -14,7 +14,7 @@ public final class ListUtil {
   /**
    * Applies a transformation function on each element of the input list.
    */
-  public static <T, R> List<R> transformList(List<T> input, Func1<T, R> func) {
+  public static <T, R> List<R> transform(List<T> input, Func1<T, R> func) {
     if (input == null || input.isEmpty()) {
       return Collections.emptyList();
     }

@@ -32,7 +32,7 @@ public class AirlineRepository {
       return Single.just(allAirlines);
     }
     return kayakApi.getAirlines()
-        .map(models -> ListUtil.transformList(models, AirlineAdapter::fromAirlineResponse))
+        .map(models -> ListUtil.transform(models, AirlineAdapter::fromAirlineResponse))
         .map(ListUtil::sort);
   }
 
