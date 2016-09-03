@@ -1,7 +1,6 @@
-package com.oguzbabaoglu.kayakairlines.repository;
+package com.oguzbabaoglu.kayakairlines.features.airlines;
 
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
-import com.oguzbabaoglu.kayakairlines.features.airlines.AirlineRepository;
 import com.oguzbabaoglu.kayakairlines.network.KayakApi;
 import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
@@ -37,7 +36,7 @@ public class AirlineRepositoryTest {
         .build();
   }
 
-  static AirlineResponse airlineModel(String name) {
+  static AirlineResponse airlineResponse(String name) {
     return AirlineResponse.builder()
         .clazz("test")
         .defaultName(name)
@@ -50,9 +49,9 @@ public class AirlineRepositoryTest {
 
   @Test public void testGetAllAirlinesReturnsSortedList() {
     when(kayakApi.getAirlines()).thenReturn(Single.just(Arrays.asList(
-        airlineModel("Jet Blue"),
-        airlineModel("9 Air"),
-        airlineModel("Air Canada")
+        airlineResponse("Jet Blue"),
+        airlineResponse("9 Air"),
+        airlineResponse("Air Canada")
     )));
 
     List<Airline> airlines = airlineRepository.getAllAirlines().toBlocking().value();
