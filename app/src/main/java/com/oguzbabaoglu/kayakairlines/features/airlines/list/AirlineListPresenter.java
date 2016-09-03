@@ -1,7 +1,7 @@
 package com.oguzbabaoglu.kayakairlines.features.airlines.list;
 
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
-import com.oguzbabaoglu.kayakairlines.repository.AirlineRepository;
+import com.oguzbabaoglu.kayakairlines.features.airlines.AirlineRepository;
 
 import java.util.List;
 

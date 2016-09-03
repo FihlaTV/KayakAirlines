@@ -1,4 +1,4 @@
-package com.oguzbabaoglu.kayakairlines.repository;
+package com.oguzbabaoglu.kayakairlines.features.airlines;
 
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.network.response.AirlineModel;
