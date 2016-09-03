@@ -3,7 +3,7 @@ package com.oguzbabaoglu.kayakairlines.repository;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.features.airlines.AirlineRepository;
 import com.oguzbabaoglu.kayakairlines.network.KayakApi;
-import com.oguzbabaoglu.kayakairlines.network.response.AirlineModel;
+import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +37,8 @@ public class AirlineRepositoryTest {
         .build();
   }
 
-  static AirlineModel airlineModel(String name) {
-    return AirlineModel.builder()
+  static AirlineResponse airlineModel(String name) {
+    return AirlineResponse.builder()
         .clazz("test")
         .defaultName(name)
         .name(name)

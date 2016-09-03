@@ -1,6 +1,6 @@
 package com.oguzbabaoglu.kayakairlines.network;
 
-import com.oguzbabaoglu.kayakairlines.network.response.AirlineModel;
+import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import rx.Single;
 
 public interface KayakApi {
 
-  @GET("/h/mobileapis/directory/airlines") Single<List<AirlineModel>> getAirlines();
+  @GET("/h/mobileapis/directory/airlines") Single<List<AirlineResponse>> getAirlines();
 }

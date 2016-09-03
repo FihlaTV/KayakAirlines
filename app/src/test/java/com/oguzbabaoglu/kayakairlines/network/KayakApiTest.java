@@ -1,7 +1,7 @@
 package com.oguzbabaoglu.kayakairlines.network;
 
 import com.oguzbabaoglu.kayakairlines.di.DaggerAirlineComponent;
-import com.oguzbabaoglu.kayakairlines.network.response.AirlineModel;
+import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,7 +33,7 @@ public class KayakApiTest {
     String response = TestResourceLoader.load("fixtures/get_airlines_response.json");
     server.enqueue(new MockResponse().setBody(response));
 
-    List<AirlineModel> list = kayakApi.getAirlines().toBlocking().value();
+    List<AirlineResponse> list = kayakApi.getAirlines().toBlocking().value();
 
     assertThat(list).isNotNull().hasSize(3);
     assertThat(list.get(0).code()).isEqualTo("A2");

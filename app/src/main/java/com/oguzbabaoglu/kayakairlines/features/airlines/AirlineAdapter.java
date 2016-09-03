@@ -1,7 +1,7 @@
 package com.oguzbabaoglu.kayakairlines.features.airlines;
 
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
-import com.oguzbabaoglu.kayakairlines.network.response.AirlineModel;
+import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
 /**
  * Converts airline api responses to their domain counterparts.
@@ -11,12 +11,12 @@ final class AirlineAdapter {
   private AirlineAdapter() {
   }
 
-  static Airline fromAirlineModel(AirlineModel model) {
+  static Airline fromAirlineResponse(AirlineResponse response) {
     return Airline.builder()
-        .displayName(model.name())
-        .code(model.code())
-        .phone(model.phone())
-        .website(model.site())
+        .displayName(response.name())
+        .code(response.code())
+        .phone(response.phone())
+        .website(response.site())
         .isStarred(false) //TODO
         .build();
   }
