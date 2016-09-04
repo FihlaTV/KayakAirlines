@@ -24,10 +24,10 @@ public class AirlineDetailPresenter {
   }
 
   public void onPhoneClick() {
-
+    view.openDialer(airline.phone());
   }
 
   public void onWebsiteClick() {
-
+    view.openBrowser(airline.websiteUrl());
   }
 }

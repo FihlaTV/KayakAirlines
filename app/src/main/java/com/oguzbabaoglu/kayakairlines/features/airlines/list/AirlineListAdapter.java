@@ -51,7 +51,7 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
   @Override public void onBindViewHolder(AirlineHolder holder, int position) {
     Airline airline = filteredAirlines.get(position);
     Context context = holder.airlineTextView.getContext();
-    String text = context.getString(R.string.airline_list_item_text, airline.displayName(), airline.code());
+    String text = context.getString(R.string.airline_list_item_text, airline.name(), airline.code());
     holder.airlineTextView.setText(text);
     holder.airlineTextView.setCompoundDrawablesWithIntrinsicBounds(
         0, 0, airline.isStarred() ? R.drawable.ic_star : 0, 0

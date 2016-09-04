@@ -18,7 +18,7 @@ public class RemoveWhiteTransformation implements Transformation {
     int[] pixels = new int[width * height];
     source.getPixels(pixels, 0, width, 0, 0, width, height);
 
-    for(int i = 0; i < pixels.length; i++) {
+    for (int i = 0; i < pixels.length; i++) {
       pixels[i] = (pixels[i] == WHITE) ? TRANSPARENT : pixels[i];
     }
 

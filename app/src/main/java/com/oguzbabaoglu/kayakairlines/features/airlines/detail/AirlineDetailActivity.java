@@ -3,7 +3,9 @@ package com.oguzbabaoglu.kayakairlines.features.airlines.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Browser;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,16 +60,26 @@ public class AirlineDetailActivity extends AppCompatActivity implements AirlineD
         .transform(new RemoveWhiteTransformation())
         .into(logoImageView);
 
-    nameTextView.setText(airline.displayName());
+    nameTextView.setText(airline.name());
     starImageView.setImageResource(airline.isStarred() ? R.drawable.ic_star : R.drawable.ic_star_border);
     phoneTextView.setPaintFlags(phoneTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     phoneTextView.setText(airline.phone());
     websiteTextView.setPaintFlags(websiteTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-    websiteTextView.setText(airline.website());
+    websiteTextView.setText(airline.websiteHumanString());
 
     starImageView.setOnClickListener(click -> presenter.onStarClick());
     phoneTextView.setOnClickListener(click -> presenter.onPhoneClick());
     websiteTextView.setOnClickListener(click -> presenter.onWebsiteClick());
   }
 
+  @Override public void openDialer(String phone) {
+    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+    startActivity(intent);
+  }
+
+  @Override public void openBrowser(Uri website) {
+    Intent intent = new Intent(Intent.ACTION_VIEW, website);
+    intent.putExtra(Browser.EXTRA_APPLICATION_ID, getPackageName());
+    startActivity(intent);
+  }
 }
