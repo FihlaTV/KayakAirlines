@@ -58,7 +58,8 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     );
     int logoWidth = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_width);
     int logoHeight = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_height);
-    Picasso.with(context).load(airline.logoUrl())
+    Picasso.with(context)
+        .load(airline.logoUrl())
         .placeholder(R.drawable.airline_logo_placeholder)
         .resize(logoWidth, logoHeight)
         .transform(logoTransformation)

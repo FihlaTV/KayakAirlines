@@ -94,11 +94,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Phone"
+            android:text="@string/airline_detail_phone"
             android:textColor="@color/colorPrimary"
             />
 
         <TextView
+            android:id="@+id/airline_detail_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
@@ -120,11 +121,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Website"
+            android:text="@string/airline_detail_website"
             android:textColor="@color/colorPrimary"
             />
 
         <TextView
+            android:id="@+id/airline_detail_website"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"

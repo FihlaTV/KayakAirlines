@@ -15,5 +15,7 @@
   <string name="airline_list_search_hint">Search airlines</string>
   <string name="airline_list_item_text">%1$s (%2$s)</string>
   <string name="airline_item_image_description">Airline logo</string>
+  <string name="airline_detail_phone">Phone</string>
+  <string name="airline_detail_website">Website</string>
 
 </resources>

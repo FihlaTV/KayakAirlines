@@ -1,6 +1,7 @@
 package com.oguzbabaoglu.kayakairlines.features.airlines;
 
 import com.google.gson.Gson;
+import com.oguzbabaoglu.kayakairlines.features.airlines.detail.AirlineDetailActivity;
 import com.oguzbabaoglu.kayakairlines.features.airlines.list.AirlineListFragment;
 import com.oguzbabaoglu.kayakairlines.network.KayakApi;
 import com.oguzbabaoglu.kayakairlines.network.NetworkModule;
@@ -21,4 +22,5 @@ public interface AirlineComponent {
 
   void inject(AirlineInfoActivity activity);
   void inject(AirlineListFragment fragment);
+  void inject(AirlineDetailActivity activity);
 }

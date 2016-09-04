@@ -84,6 +84,6 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
   }
 
   @Override public void displayAirlineDetailView(Airline airline) {
-    startActivity(AirlineDetailActivity.newIntent(getContext()));
+    startActivity(AirlineDetailActivity.newIntent(getContext(), airline));
   }
 }
