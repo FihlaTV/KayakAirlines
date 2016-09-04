@@ -20,4 +20,8 @@ public interface AirlineListView {
   void displayAirlineDetailView(Airline airline);
 
   void notifyItemChanged(String changedAirlineCode);
+
+  void addAirline(Airline airline);
+
+  void removeAirline(Airline airline);
 }

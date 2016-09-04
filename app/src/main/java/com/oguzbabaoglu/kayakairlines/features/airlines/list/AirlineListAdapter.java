@@ -35,14 +35,16 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
   private final Transformation logoTransformation;
   private final AirlineFilter airlineFilter;
   private final StarredAirlineHelper starredAirlineHelper;
+  private final List<Airline> allAirlines;
 
   private List<Airline> filteredAirlines;
 
   public AirlineListAdapter(List<Airline> airlines, StarredAirlineHelper starredAirlineHelper,
                             OnItemClickListener listener) {
     this.listener = listener;
+    this.allAirlines = airlines;
     this.filteredAirlines = airlines;
-    this.airlineFilter = new AirlineFilter(airlines);
+    this.airlineFilter = new AirlineFilter();
     this.logoTransformation = new RemoveWhiteTransformation();
     this.starredAirlineHelper = starredAirlineHelper;
   }
@@ -96,20 +98,14 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
   }
 
   class AirlineFilter extends Filter {
-    private final List<Airline> airlines;
-
-    public AirlineFilter(List<Airline> airlines) {
-      this.airlines = airlines;
-    }
-
     @Override protected FilterResults performFiltering(CharSequence constraint) {
       FilterResults results = new FilterResults();
       if (TextUtils.isEmpty(constraint)) {
-        results.count = airlines.size();
-        results.values = airlines;
+        results.count = allAirlines.size();
+        results.values = allAirlines;
         return results;
       }
-      List<Airline> filteredValues = ListUtil.filter(airlines, airline -> airline.matches(constraint));
+      List<Airline> filteredValues = ListUtil.filter(allAirlines, airline -> airline.matches(constraint));
       results.count = filteredValues.size();
       results.values = filteredValues;
       return results;
@@ -129,6 +125,24 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
         notifyItemChanged(i);
         return;
       }
+    }
+  }
+
+  public void addAirline(Airline airline, String filter) {
+    allAirlines.add(airline);
+    ListUtil.sort(allAirlines);
+    // Reapply filter
+    getFilter().filter(filter);
+  }
+
+  public void removeAirline(Airline airline) {
+    int index = filteredAirlines.indexOf(airline);
+    if (index != -1) {
+      filteredAirlines.remove(index);
+      notifyItemRemoved(index);
+    }
+    if (filteredAirlines != allAirlines) {
+      allAirlines.remove(airline);
     }
   }
 

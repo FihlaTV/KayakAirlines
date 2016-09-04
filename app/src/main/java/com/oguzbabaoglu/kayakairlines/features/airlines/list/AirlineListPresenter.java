@@ -19,7 +19,10 @@ public class AirlineListPresenter implements StarredAirlineHelper.Subscriber {
 
   private AirlineListView view;
   private int type;
+
+  private List<Airline> allAirlines;
   private String changedAirlineCode;
+  private boolean changedAirlineStarred;
 
   @Inject public AirlineListPresenter(AirlineRepository repository, StarredAirlineHelper starredAirlineHelper) {
     this.repository = repository;
@@ -50,6 +53,7 @@ public class AirlineListPresenter implements StarredAirlineHelper.Subscriber {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new SingleSubscriber<List<Airline>>() {
           @Override public void onSuccess(List<Airline> airlines) {
+            allAirlines = airlines;
             if (type == AirlineListView.STARRED) {
               airlines = ListUtil.filter(airlines,
                   airline -> starredAirlineHelper.isStarred(airline.code()));
@@ -64,9 +68,29 @@ public class AirlineListPresenter implements StarredAirlineHelper.Subscriber {
   }
 
   public void onStart() {
-    if (changedAirlineCode != null) {
-      view.notifyItemChanged(changedAirlineCode);
+    if (changedAirlineCode == null)  return;
+    switch (type) {
+      case AirlineListView.ALL:
+        view.notifyItemChanged(changedAirlineCode);
+        break;
+      case AirlineListView.STARRED:
+        if (changedAirlineStarred) {
+          view.addAirline(getAirlineForCode(changedAirlineCode));
+        } else {
+          view.removeAirline(getAirlineForCode(changedAirlineCode));
+        }
+        break;
     }
+    changedAirlineCode = null;
+  }
+
+  private Airline getAirlineForCode(String code) {
+    for (Airline airline : allAirlines) {
+      if (airline.code().equals(code)) {
+        return airline;
+      }
+    }
+    return null;
   }
 
   public void onDestroy() {
@@ -75,5 +99,6 @@ public class AirlineListPresenter implements StarredAirlineHelper.Subscriber {
 
   @Override public void stateChanged(String code, boolean starred) {
     changedAirlineCode = code;
+    changedAirlineStarred = starred;
   }
 }

@@ -105,6 +105,14 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
     listAdapter.notifyAirlineItemChanged(changedAirlineCode);
   }
 
+  @Override public void addAirline(Airline airline) {
+    listAdapter.addAirline(airline, airlineSearchText.getText().toString());
+  }
+
+  @Override public void removeAirline(Airline airline) {
+    listAdapter.removeAirline(airline);
+  }
+
   @Override public void onStart() {
     super.onStart();
     presenter.onStart();

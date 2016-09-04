@@ -6,14 +6,12 @@ import com.oguzbabaoglu.kayakairlines.BuildConfig;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
-import javax.inject.Inject;
-
 /**
  * Converts airline api responses to their domain counterparts.
  */
 final class AirlineAdapter {
 
-  @Inject public AirlineAdapter() {
+  private AirlineAdapter() {
   }
 
   static Airline fromAirlineResponse(AirlineResponse response) {
