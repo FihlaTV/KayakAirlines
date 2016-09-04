@@ -3,6 +3,7 @@ package com.oguzbabaoglu.kayakairlines.features.airlines;
 import com.google.gson.Gson;
 import com.oguzbabaoglu.kayakairlines.features.airlines.detail.AirlineDetailActivity;
 import com.oguzbabaoglu.kayakairlines.features.airlines.list.AirlineListFragment;
+import com.oguzbabaoglu.kayakairlines.features.airlines.starred.StarredAirlineModule;
 import com.oguzbabaoglu.kayakairlines.network.KayakApi;
 import com.oguzbabaoglu.kayakairlines.network.NetworkModule;
 import com.oguzbabaoglu.kayakairlines.persistence.PersistenceModule;
@@ -16,7 +17,8 @@ import dagger.Component;
 @Component(modules = {
     NetworkModule.class,
     PersistenceModule.class,
-    ContextModule.class
+    ContextModule.class,
+    StarredAirlineModule.class
 })
 public interface AirlineComponent {
 

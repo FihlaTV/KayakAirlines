@@ -17,12 +17,12 @@ public final class Airlines {
         .name(name)
         .code(code)
         .logoUrl(mock(Uri.class))
-        .isStarred(false)
         .build();
   }
 
-  public static AirlineResponse airlineResponse(String code) {
+  public static AirlineResponse airlineResponse(String name, String code) {
     return airlineResponseBuilder()
+        .name(name)
         .code(code)
         .build();
   }

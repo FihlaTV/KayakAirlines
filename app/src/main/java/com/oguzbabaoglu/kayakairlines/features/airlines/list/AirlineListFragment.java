@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.features.airlines.detail.AirlineDetailActivity;
+import com.oguzbabaoglu.kayakairlines.features.airlines.starred.StarredAirlineHelper;
 import com.oguzbabaoglu.kayakairlines.util.Dagger;
 import com.oguzbabaoglu.kayakairlines.util.DividerItemDecoration;
 import com.oguzbabaoglu.kayakairlines.util.ListUtil;
@@ -35,6 +36,7 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
   @BindView(R.id.airline_list_recyclerview) RecyclerView airlineRecyclerView;
 
   @Inject AirlineListPresenter presenter;
+  @Inject StarredAirlineHelper starredAirlineHelper;
 
   private AirlineListAdapter listAdapter;
 
@@ -67,7 +69,8 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
 
     airlineSearchClear.setOnClickListener(click -> presenter.onSearchClearClick());
     airlineSearchText.addTextChangedListener(TextUtil.doAfter(text -> presenter.onFilterTextChanged(text)));
-    listAdapter = new AirlineListAdapter(airlines, airline -> presenter.onAirlineClick(airline));
+    listAdapter = new AirlineListAdapter(airlines, starredAirlineHelper,
+        airline -> presenter.onAirlineClick(airline));
     airlineRecyclerView.setAdapter(listAdapter);
   }
 

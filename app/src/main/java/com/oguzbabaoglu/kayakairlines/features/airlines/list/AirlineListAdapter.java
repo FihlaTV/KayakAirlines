@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.oguzbabaoglu.kayakairlines.R;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
+import com.oguzbabaoglu.kayakairlines.features.airlines.starred.StarredAirlineHelper;
 import com.oguzbabaoglu.kayakairlines.util.ListUtil;
 import com.oguzbabaoglu.kayakairlines.util.RemoveWhiteTransformation;
 import com.squareup.picasso.Picasso;
@@ -33,14 +34,17 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
   private final OnItemClickListener listener;
   private final Transformation logoTransformation;
   private final AirlineFilter airlineFilter;
+  private final StarredAirlineHelper starredAirlineHelper;
 
   private List<Airline> filteredAirlines;
 
-  public AirlineListAdapter(List<Airline> airlines, OnItemClickListener listener) {
+  public AirlineListAdapter(List<Airline> airlines, StarredAirlineHelper starredAirlineHelper,
+                            OnItemClickListener listener) {
     this.listener = listener;
     this.filteredAirlines = airlines;
     this.airlineFilter = new AirlineFilter(airlines);
     this.logoTransformation = new RemoveWhiteTransformation();
+    this.starredAirlineHelper = starredAirlineHelper;
   }
 
   @Override public AirlineHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,7 +58,7 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     String text = context.getString(R.string.airline_list_item_text, airline.name(), airline.code());
     holder.airlineTextView.setText(text);
     holder.airlineTextView.setCompoundDrawablesWithIntrinsicBounds(
-        0, 0, airline.isStarred() ? R.drawable.ic_star : 0, 0
+        0, 0, starredAirlineHelper.isStarred(airline.code()) ? R.drawable.ic_star : 0, 0
     );
     int logoWidth = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_width);
     int logoHeight = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_height);

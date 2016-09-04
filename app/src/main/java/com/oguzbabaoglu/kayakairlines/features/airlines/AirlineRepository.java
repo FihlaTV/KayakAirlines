@@ -20,16 +20,11 @@ import rx.Single;
 public class AirlineRepository {
 
   private final KayakApi kayakApi;
-  private final StarredAirlineHelper starredAirlineHelper;
-  private final AirlineAdapter airlineAdapter;
 
   private volatile List<Airline> allAirlines; // Can be set and read from separate threads
 
-  @Inject public AirlineRepository(KayakApi kayakApi, StarredAirlineHelper starredAirlineHelper,
-                                   AirlineAdapter airlineAdapter) {
+  @Inject public AirlineRepository(KayakApi kayakApi) {
     this.kayakApi = kayakApi;
-    this.starredAirlineHelper = starredAirlineHelper;
-    this.airlineAdapter = airlineAdapter;
   }
 
   public Single<List<Airline>> getAllAirlines() {
@@ -37,7 +32,7 @@ public class AirlineRepository {
       return Single.just(allAirlines);
     }
     return kayakApi.getAirlines()
-        .map(models -> ListUtil.transform(models, airlineAdapter::fromAirlineResponse))
+        .map(models -> ListUtil.transform(models, AirlineAdapter::fromAirlineResponse))
         .map(ListUtil::sort)
         .doOnSuccess(airlines -> allAirlines = airlines);
   }

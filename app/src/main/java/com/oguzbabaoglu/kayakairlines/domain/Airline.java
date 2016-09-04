@@ -15,7 +15,6 @@ public abstract class Airline implements Comparable<Airline>, Parcelable {
   public abstract Uri logoUrl();
   @Nullable public abstract String phone();
   @Nullable public abstract Uri websiteUrl();
-  public abstract boolean isStarred();
 
   public static Builder builder() {
     return new AutoValue_Airline.Builder();
@@ -75,7 +74,6 @@ public abstract class Airline implements Comparable<Airline>, Parcelable {
     public abstract Builder logoUrl(Uri logoUrl);
     public abstract Builder phone(String phone);
     public abstract Builder websiteUrl(Uri websiteUrl);
-    public abstract Builder isStarred(boolean starred);
     public abstract Airline build();
   }
 }

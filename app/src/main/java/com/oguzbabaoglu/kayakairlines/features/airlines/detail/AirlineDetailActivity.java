@@ -69,7 +69,6 @@ public class AirlineDetailActivity extends AppCompatActivity implements AirlineD
         .into(logoImageView);
 
     nameTextView.setText(airline.name());
-    starImageView.setImageResource(airline.isStarred() ? R.drawable.ic_star : R.drawable.ic_star_border);
     phoneTextView.setPaintFlags(phoneTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     phoneTextView.setText(airline.phone());
     websiteTextView.setPaintFlags(websiteTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -78,6 +77,10 @@ public class AirlineDetailActivity extends AppCompatActivity implements AirlineD
     starImageView.setOnClickListener(click -> presenter.onStarClick());
     phoneTextView.setOnClickListener(click -> presenter.onPhoneClick());
     websiteTextView.setOnClickListener(click -> presenter.onWebsiteClick());
+  }
+
+  @Override public void setStarred(boolean full) {
+    starImageView.setImageResource(full ? R.drawable.ic_star : R.drawable.ic_star_border);
   }
 
   @Override public void openDialer(String phone) {
