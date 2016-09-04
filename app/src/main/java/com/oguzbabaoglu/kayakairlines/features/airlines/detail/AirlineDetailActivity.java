@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Browser;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class AirlineDetailActivity extends AppCompatActivity implements AirlineD
 
   private static final String KEY_AIRLINE = "KEY_AIRLINE";
 
+  @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.airline_detail_logo) ImageView logoImageView;
   @BindView(R.id.airline_detail_name) TextView nameTextView;
   @BindView(R.id.airline_detail_star) ImageView starImageView;
@@ -42,7 +44,11 @@ public class AirlineDetailActivity extends AppCompatActivity implements AirlineD
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_airline_detail);
     ButterKnife.bind(this);
+    setSupportActionBar(toolbar);
     Dagger.INJECTOR.airlineComponent().inject(this);
+
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    toolbar.setNavigationOnClickListener(click -> onBackPressed());
 
     Airline airline = getIntent().getParcelableExtra(KEY_AIRLINE);
     init(airline);
@@ -51,6 +57,8 @@ public class AirlineDetailActivity extends AppCompatActivity implements AirlineD
   }
 
   private void init(Airline airline) {
+    getSupportActionBar().setTitle(airline.name());
+
     int logoWidth = getResources().getDimensionPixelSize(R.dimen.airline_logo_width);
     int logoHeight = getResources().getDimensionPixelSize(R.dimen.airline_logo_height);
     Picasso.with(this)
