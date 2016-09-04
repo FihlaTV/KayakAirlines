@@ -5,6 +5,8 @@ import com.oguzbabaoglu.kayakairlines.features.airlines.detail.AirlineDetailActi
 import com.oguzbabaoglu.kayakairlines.features.airlines.list.AirlineListFragment;
 import com.oguzbabaoglu.kayakairlines.network.KayakApi;
 import com.oguzbabaoglu.kayakairlines.network.NetworkModule;
+import com.oguzbabaoglu.kayakairlines.persistence.PersistenceModule;
+import com.oguzbabaoglu.kayakairlines.util.ContextModule;
 
 import javax.inject.Singleton;
 
@@ -12,7 +14,9 @@ import dagger.Component;
 
 @Singleton // scoped as singleton for convenience (this is a single-feature app)
 @Component(modules = {
-    NetworkModule.class
+    NetworkModule.class,
+    PersistenceModule.class,
+    ContextModule.class
 })
 public interface AirlineComponent {
 

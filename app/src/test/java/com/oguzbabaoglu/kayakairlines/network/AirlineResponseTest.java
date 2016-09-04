@@ -2,10 +2,10 @@ package com.oguzbabaoglu.kayakairlines.network;
 
 import com.google.gson.Gson;
 import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
-import com.oguzbabaoglu.kayakairlines.util.Dagger;
 
 import org.junit.Test;
 
+import testutil.TestDagger;
 import testutil.TestResourceLoader;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AirlineResponseTest {
 
   @Test public void testParse() {
-    Gson gson = Dagger.INJECTOR.airlineComponent().gson();
+    Gson gson = TestDagger.INJECTOR.airlineComponent().gson();
     String json = TestResourceLoader.load("fixtures/airline_response.json");
     AirlineResponse response = gson.fromJson(json, AirlineResponse.class);
 

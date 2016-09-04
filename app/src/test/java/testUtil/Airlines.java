@@ -10,7 +10,7 @@ public final class Airlines {
 
   public static Airline airline(String name) {
     return Airline.builder()
-        .displayName(name)
+        .name(name)
         .code("test")
         .isStarred(false)
         .build();

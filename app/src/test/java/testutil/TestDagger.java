@@ -1,19 +1,25 @@
-package com.oguzbabaoglu.kayakairlines.util;
+package testutil;
+
+import android.content.Context;
 
 import com.oguzbabaoglu.kayakairlines.features.airlines.AirlineComponent;
 import com.oguzbabaoglu.kayakairlines.features.airlines.DaggerAirlineComponent;
+import com.oguzbabaoglu.kayakairlines.util.ContextModule;
+
+import org.mockito.Mockito;
 
 /**
- * Initiates the main component on first injection call. Thread-safe.
+ * Test version of the Dagger injection graph.
+ * Uses mocks for Android dependant modules.
  */
-public enum Dagger {
+public enum  TestDagger {
   INJECTOR;
 
   private final AirlineComponent airlineComponent;
 
-  Dagger() {
+  TestDagger() {
     this.airlineComponent = DaggerAirlineComponent.builder()
-        .contextModule(new ContextModule(KayakApplication.instance))
+        .contextModule(new ContextModule(Mockito.mock(Context.class)))
         .build();
   }
 
