@@ -11,7 +11,7 @@ import javax.inject.Inject;
 /**
  * Converts airline api responses to their domain counterparts.
  */
-final class AirlineAdapter {
+public class AirlineAdapter {
 
   private final StarredAirlineHelper starredAirlineHelper;
 
@@ -20,20 +20,25 @@ final class AirlineAdapter {
   }
 
   Airline fromAirlineResponse(AirlineResponse response) {
-    String domain = response.site();
-    Uri websiteUri = domain == null ? null
-        : new Uri.Builder().scheme("http").authority(domain).build();
-
-    String logoPath = response.logoUrl();
-    Uri logoUri = Uri.parse(BuildConfig.BASE_URL).buildUpon().path(logoPath).build();
-
     return Airline.builder()
         .name(response.name())
         .code(response.code())
-        .logoUrl(logoUri)
+        .logoUrl(buildLogoUri(response.logoUrl()))
         .phone(response.phone())
-        .websiteUrl(websiteUri)
+        .websiteUrl(buildWebsiteUri(response.site()))
         .isStarred(starredAirlineHelper.isStarred(response.code()))
         .build();
+  }
+
+  private Uri buildLogoUri(String logoPath) {
+    return Uri.parse(BuildConfig.BASE_URL).buildUpon().path(logoPath).build();
+  }
+
+  private Uri buildWebsiteUri(String site) {
+    if (site == null) return null;
+    if (!site.startsWith("http")) {
+      site = "http://" + site;
+    }
+    return Uri.parse(site);
   }
 }

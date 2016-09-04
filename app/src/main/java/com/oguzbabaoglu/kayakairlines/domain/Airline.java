@@ -44,6 +44,30 @@ public abstract class Airline implements Comparable<Airline>, Parcelable {
     return name().toLowerCase().contains(match) || code().toLowerCase().contains(match);
   }
 
+  /**
+   * {@link #code()} is considered to be unique for each Airline.
+   */
+  @Override public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (o instanceof Airline) {
+      Airline that = (Airline) o;
+      return this.code().equals(that.code());
+    }
+    return false;
+  }
+
+  /**
+   * {@link #code()} is considered to be unique for each Airline.
+   */
+  @Override public int hashCode() {
+    int h = 1;
+    h *= 1000003;
+    h ^= this.code().hashCode();
+    return h;
+  }
+
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder name(String name);

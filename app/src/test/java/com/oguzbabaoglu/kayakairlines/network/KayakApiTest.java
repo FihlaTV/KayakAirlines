@@ -1,6 +1,5 @@
 package com.oguzbabaoglu.kayakairlines.network;
 
-import com.oguzbabaoglu.kayakairlines.features.airlines.DaggerAirlineComponent;
 import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
 import org.junit.Before;
@@ -11,6 +10,7 @@ import java.util.List;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import testutil.TestDagger;
 import testutil.TestResourceLoader;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,15 +18,12 @@ import static testutil.AssertRecordedRequest.assertRecordedRequest;
 
 public class KayakApiTest {
 
-  @Rule public final MockWebServer server = new MockWebServer();
+  @Rule public final MockWebServer server = TestDagger.INJECTOR.mockWebServer();
 
   KayakApi kayakApi;
 
   @Before public void setUp() {
-    kayakApi = DaggerAirlineComponent.builder()
-        .networkModule(new NetworkModule(server.url("/").toString()))
-        .build()
-        .kayakApi();
+    kayakApi = TestDagger.INJECTOR.airlineComponent().kayakApi();
   }
 
   @Test public void testGetAirlines() throws InterruptedException {
