@@ -10,11 +10,17 @@ import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Single;
+import rx.observers.TestSubscriber;
+import rx.schedulers.Schedulers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static testutil.Airlines.airline;
@@ -46,5 +52,38 @@ public class AirlineRepositoryTest {
         airline("Air Canada", "AC"),
         airline("Jet Blue", "B6")
     );
+  }
+
+  @Test public void testGetAllAirlinesCachedInMemory() {
+    when(mockApi.getAirlines()).thenReturn(Single.just(Collections.singletonList(
+        airlineResponse("Jet Blue", "B6")
+    )));
+
+    List<Airline> airlines = airlineRepository.getAllAirlines().toBlocking().value();
+    assertThat(airlines).containsExactly(airline("Jet Blue", "B6"));
+
+    airlines = airlineRepository.getAllAirlines().toBlocking().value();
+    assertThat(airlines).containsExactly(airline("Jet Blue", "B6"));
+
+    verify(mockApi, times(1)).getAirlines();
+  }
+
+  @Test public void testGetAllAirlinesSharesSameSingle() {
+    when(mockApi.getAirlines()).thenReturn(Single.just(Collections.singletonList(
+        airlineResponse("Jet Blue", "B6")
+    )).delay(500, TimeUnit.MILLISECONDS));
+
+    TestSubscriber<List<Airline>> first = TestSubscriber.create();
+    TestSubscriber<List<Airline>> second = TestSubscriber.create();
+
+    airlineRepository.getAllAirlines()
+        .observeOn(Schedulers.trampoline())
+        .subscribe(first);
+
+    airlineRepository.getAllAirlines()
+        .observeOn(Schedulers.trampoline())
+        .subscribe(second);
+
+    verify(mockApi, times(1)).getAirlines();
   }
 }

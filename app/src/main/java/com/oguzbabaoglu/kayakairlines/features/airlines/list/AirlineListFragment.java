@@ -17,7 +17,6 @@ import com.oguzbabaoglu.kayakairlines.features.airlines.detail.AirlineDetailActi
 import com.oguzbabaoglu.kayakairlines.features.airlines.starred.StarredAirlineHelper;
 import com.oguzbabaoglu.kayakairlines.util.Dagger;
 import com.oguzbabaoglu.kayakairlines.util.DividerItemDecoration;
-import com.oguzbabaoglu.kayakairlines.util.ListUtil;
 import com.oguzbabaoglu.kayakairlines.util.TextUtil;
 
 import java.util.List;
@@ -29,7 +28,7 @@ import butterknife.ButterKnife;
 
 public class AirlineListFragment extends Fragment implements AirlineListView {
 
-  private static final String KEY_AIRLINES = "KEY_AIRLINES";
+  private static final String KEY_TYPE = "KEY_TYPE";
 
   @BindView(R.id.airline_list_search) EditText airlineSearchText;
   @BindView(R.id.airline_list_search_clear) ImageView airlineSearchClear;
@@ -40,9 +39,17 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
 
   private AirlineListAdapter listAdapter;
 
-  public static AirlineListFragment newInstance(List<Airline> airlines) {
+  public static AirlineListFragment newAllInstance() {
+    return newInstance(ALL);
+  }
+
+  public static AirlineListFragment newStarredInstance() {
+    return newInstance(STARRED);
+  }
+
+  private static AirlineListFragment newInstance(int type) {
     Bundle args = new Bundle();
-    args.putParcelableArrayList(KEY_AIRLINES, ListUtil.asArrayList(airlines));
+    args.putInt(KEY_TYPE, type);
     AirlineListFragment fragment = new AirlineListFragment();
     fragment.setArguments(args);
     return fragment;
@@ -51,7 +58,7 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Dagger.INJECTOR.airlineComponent().inject(this);
-    presenter.setView(this);
+    presenter.setView(this, getArguments().getInt(KEY_TYPE));
   }
 
   @Nullable
@@ -62,13 +69,17 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
-    List<Airline> airlines = getArguments().getParcelableArrayList(KEY_AIRLINES);
 
     airlineRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     airlineRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
     airlineSearchClear.setOnClickListener(click -> presenter.onSearchClearClick());
     airlineSearchText.addTextChangedListener(TextUtil.doAfter(text -> presenter.onFilterTextChanged(text)));
+
+    presenter.init();
+  }
+
+  @Override public void updateContent(List<Airline> airlines) {
     listAdapter = new AirlineListAdapter(airlines, starredAirlineHelper,
         airline -> presenter.onAirlineClick(airline));
     airlineRecyclerView.setAdapter(listAdapter);

@@ -14,11 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.oguzbabaoglu.kayakairlines.R;
-import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.features.airlines.list.AirlineListFragment;
 import com.oguzbabaoglu.kayakairlines.util.Dagger;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -45,32 +42,19 @@ public class AirlineInfoActivity extends AppCompatActivity implements AirlineInf
     setSupportActionBar(toolbar);
     Dagger.INJECTOR.airlineComponent().inject(this);
 
+    presenter.setView(this);
+
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawerLayout.addDrawerListener(toggle);
     toggle.syncState();
-    navigationView.setNavigationItemSelectedListener(item -> {
-      Snackbar.make(navigationView, "Not implemented.", Snackbar.LENGTH_SHORT).show();
-      return true;
-    });
+    navigationView.setNavigationItemSelectedListener(item -> presenter.onNavigationItemClick());
 
-    presenter.setView(this);
-    presenter.init();
-  }
-
-  @Override public void onBackPressed() {
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    if (drawer.isDrawerOpen(GravityCompat.START)) {
-      drawer.closeDrawer(GravityCompat.START);
-    } else {
-      super.onBackPressed();
-    }
-  }
-
-  @Override public void displayListTabs(List<Airline> all, List<Airline> starred) {
     airlineViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
       @Override public Fragment getItem(int position) {
-        return AirlineListFragment.newInstance(position == INDEX_ALL ? all : starred);
+        return position == INDEX_ALL
+            ? AirlineListFragment.newAllInstance()
+            : AirlineListFragment.newStarredInstance();
       }
 
       @Override public int getCount() {
@@ -83,5 +67,18 @@ public class AirlineInfoActivity extends AppCompatActivity implements AirlineInf
     });
 
     airlineTabLayout.setupWithViewPager(airlineViewPager);
+  }
+
+  @Override public void onBackPressed() {
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    if (drawer.isDrawerOpen(GravityCompat.START)) {
+      drawer.closeDrawer(GravityCompat.START);
+    } else {
+      super.onBackPressed();
+    }
+  }
+
+  @Override public void showSnackBarMessage(String message) {
+    Snackbar.make(navigationView, message, Snackbar.LENGTH_SHORT).show();
   }
 }

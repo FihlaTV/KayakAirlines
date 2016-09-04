@@ -4,12 +4,14 @@ import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.network.KayakApi;
 import com.oguzbabaoglu.kayakairlines.util.ListUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Single;
+import rx.schedulers.Schedulers;
 
 /**
  * Fetches airline list from api and keeps it in memory.
@@ -21,7 +23,9 @@ public class AirlineRepository {
 
   private final KayakApi kayakApi;
 
-  private volatile List<Airline> allAirlines; // Can be set and read from separate threads
+  // These will be set and read from separate threads
+  private volatile List<Airline> allAirlines;
+  private volatile Single<List<Airline>> activeCall;
 
   @Inject public AirlineRepository(KayakApi kayakApi) {
     this.kayakApi = kayakApi;
@@ -31,9 +35,19 @@ public class AirlineRepository {
     if (allAirlines != null) {
       return Single.just(allAirlines);
     }
-    return kayakApi.getAirlines()
+    if (activeCall != null) {
+      return activeCall;
+    }
+    activeCall = kayakApi.getAirlines()
         .map(models -> ListUtil.transform(models, AirlineAdapter::fromAirlineResponse))
         .map(ListUtil::sort)
-        .doOnSuccess(airlines -> allAirlines = airlines);
+        .map(Collections::unmodifiableList)
+        .doOnSuccess(airlines -> {
+          allAirlines = airlines;
+          activeCall = null;
+        })
+        .subscribeOn(Schedulers.io())
+        .toObservable().share().toSingle(); // there is no share() for Single
+    return activeCall;
   }
 }
