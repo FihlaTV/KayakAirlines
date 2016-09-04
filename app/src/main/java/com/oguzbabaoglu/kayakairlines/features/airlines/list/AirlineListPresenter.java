@@ -12,17 +12,19 @@ import javax.inject.Inject;
 import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
-public class AirlineListPresenter {
+public class AirlineListPresenter implements StarredAirlineHelper.Subscriber {
 
   private final AirlineRepository repository;
   private final StarredAirlineHelper starredAirlineHelper;
 
   private AirlineListView view;
   private int type;
+  private String changedAirlineCode;
 
   @Inject public AirlineListPresenter(AirlineRepository repository, StarredAirlineHelper starredAirlineHelper) {
     this.repository = repository;
     this.starredAirlineHelper = starredAirlineHelper;
+    starredAirlineHelper.subscribe(this);
   }
 
   public void setView(AirlineListView view, int type) {
@@ -59,5 +61,19 @@ public class AirlineListPresenter {
 
           }
         });
+  }
+
+  public void onStart() {
+    if (changedAirlineCode != null) {
+      view.notifyItemChanged(changedAirlineCode);
+    }
+  }
+
+  public void onDestroy() {
+    starredAirlineHelper.unSubscribe(this);
+  }
+
+  @Override public void stateChanged(String code, boolean starred) {
+    changedAirlineCode = code;
   }
 }

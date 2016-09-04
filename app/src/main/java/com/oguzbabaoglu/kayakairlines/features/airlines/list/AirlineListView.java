@@ -10,6 +10,7 @@ public interface AirlineListView {
   int STARRED = 1;
 
   void updateContent(List<Airline> airlines);
+
   void filterAirlines(String constraint);
 
   void showSearchClearButton(boolean show);
@@ -17,4 +18,6 @@ public interface AirlineListView {
   void clearFilter();
 
   void displayAirlineDetailView(Airline airline);
+
+  void notifyItemChanged(String changedAirlineCode);
 }

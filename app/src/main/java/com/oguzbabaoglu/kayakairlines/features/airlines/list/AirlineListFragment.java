@@ -100,4 +100,18 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
   @Override public void displayAirlineDetailView(Airline airline) {
     startActivity(AirlineDetailActivity.newIntent(getContext(), airline));
   }
+
+  @Override public void notifyItemChanged(String changedAirlineCode) {
+    listAdapter.notifyAirlineItemChanged(changedAirlineCode);
+  }
+
+  @Override public void onStart() {
+    super.onStart();
+    presenter.onStart();
+  }
+
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    presenter.onDestroy();
+  }
 }

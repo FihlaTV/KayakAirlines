@@ -5,19 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     >
   <ImageView
       android:id="@+id/airline_item_image"
       android:layout_width="@dimen/airline_logo_width"
       android:layout_height="@dimen/airline_logo_height"
       android:layout_gravity="center_vertical"
-      android:layout_marginLeft="@dimen/activity_horizontal_margin"
       android:contentDescription="@string/airline_item_image_description"
+      tools:src="@drawable/airline_logo_placeholder"
       />
   <TextView
       android:id="@+id/airline_item_text"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_weight="1"
       android:paddingBottom="@dimen/clickable_list_item_padding"
       android:paddingLeft="@dimen/activity_horizontal_margin"
       android:paddingRight="@dimen/activity_horizontal_margin"
@@ -25,6 +28,13 @@
       android:textColor="@color/colorPrimary"
       android:textSize="15sp"
       tools:text="Air Canada (AC)"
+      />
+  <ImageView
+      android:id="@+id/airline_item_star"
+      android:layout_width="@dimen/airline_logo_height"
+      android:layout_height="@dimen/airline_logo_height"
+      android:layout_gravity="center_vertical"
+      android:contentDescription="@string/airline_item_image_description"
       />
 
 </LinearLayout>

@@ -57,8 +57,8 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     Context context = holder.airlineTextView.getContext();
     String text = context.getString(R.string.airline_list_item_text, airline.name(), airline.code());
     holder.airlineTextView.setText(text);
-    holder.airlineTextView.setCompoundDrawablesWithIntrinsicBounds(
-        0, 0, starredAirlineHelper.isStarred(airline.code()) ? R.drawable.ic_star : 0, 0
+    holder.airlineStarImageView.setImageResource(
+        starredAirlineHelper.isStarred(airline.code()) ? R.drawable.ic_star : 0
     );
     int logoWidth = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_width);
     int logoHeight = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_height);
@@ -77,6 +77,7 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
   class AirlineHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     @BindView(R.id.airline_item_text) TextView airlineTextView;
     @BindView(R.id.airline_item_image) ImageView airlineLogoImageView;
+    @BindView(R.id.airline_item_star) ImageView airlineStarImageView;
 
     public AirlineHolder(View itemView) {
       super(itemView);
@@ -118,6 +119,16 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     @Override protected void publishResults(CharSequence constraint, FilterResults results) {
       filteredAirlines = (List<Airline>) results.values;
       notifyDataSetChanged();
+    }
+  }
+
+  public void notifyAirlineItemChanged(String changedAirlineCode) {
+    int size = filteredAirlines.size();
+    for (int i = 0; i < size; i++) {
+      if (filteredAirlines.get(i).code().equals(changedAirlineCode)) {
+        notifyItemChanged(i);
+        return;
+      }
     }
   }
 
