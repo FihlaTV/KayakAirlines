@@ -17,12 +17,10 @@ public interface Persister {
   /**
    * Order is not respected.
    */
-  Set<String> getStringSet(Key key);
+  Set<String> loadStringSet(Key key);
 
   /**
    * Order is not respected.
    */
-  void putStringSet(Key key, Set<String> value);
-
-  void delete(Key key);
+  void saveStringSet(Key key, Set<String> value);
 }

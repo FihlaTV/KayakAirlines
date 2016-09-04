@@ -19,15 +19,11 @@ class SharedPrefPersister implements Persister {
     sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
   }
 
-  @Override public Set<String> getStringSet(Key key) {
+  @Override public Set<String> loadStringSet(Key key) {
     return sharedPreferences.getStringSet(key.name(), Collections.emptySet());
   }
 
-  @Override public void putStringSet(Key key, Set<String> value) {
+  @Override public void saveStringSet(Key key, Set<String> value) {
     sharedPreferences.edit().putStringSet(key.name(), value).apply();
-  }
-
-  @Override public void delete(Key key) {
-    sharedPreferences.edit().remove(key.name()).apply();
   }
 }

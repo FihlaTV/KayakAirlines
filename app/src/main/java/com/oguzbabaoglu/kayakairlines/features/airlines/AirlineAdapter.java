@@ -6,15 +6,20 @@ import com.oguzbabaoglu.kayakairlines.BuildConfig;
 import com.oguzbabaoglu.kayakairlines.domain.Airline;
 import com.oguzbabaoglu.kayakairlines.network.model.AirlineResponse;
 
+import javax.inject.Inject;
+
 /**
  * Converts airline api responses to their domain counterparts.
  */
 final class AirlineAdapter {
 
-  private AirlineAdapter() {
+  private final StarredAirlineHelper starredAirlineHelper;
+
+  @Inject public AirlineAdapter(StarredAirlineHelper starredAirlineHelper) {
+    this.starredAirlineHelper = starredAirlineHelper;
   }
 
-  static Airline fromAirlineResponse(AirlineResponse response) {
+  Airline fromAirlineResponse(AirlineResponse response) {
     String domain = response.site();
     Uri websiteUri = domain == null ? null
         : new Uri.Builder().scheme("http").authority(domain).build();
@@ -28,7 +33,7 @@ final class AirlineAdapter {
         .logoUrl(logoUri)
         .phone(response.phone())
         .websiteUrl(websiteUri)
-        .isStarred(false) //TODO
+        .isStarred(starredAirlineHelper.isStarred(response.code()))
         .build();
   }
 }
