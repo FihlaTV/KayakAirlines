@@ -59,8 +59,8 @@ public class AirlineListAdapter extends RecyclerView.Adapter<AirlineListAdapter.
     Context context = holder.airlineTextView.getContext();
     String text = context.getString(R.string.airline_list_item_text, airline.name(), airline.code());
     holder.airlineTextView.setText(text);
-    holder.airlineStarImageView.setImageResource(
-        starredAirlineHelper.isStarred(airline.code()) ? R.drawable.ic_star : 0
+    holder.airlineStarImageView.setVisibility(
+        starredAirlineHelper.isStarred(airline.code()) ? View.VISIBLE : View.INVISIBLE
     );
     int logoWidth = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_width);
     int logoHeight = context.getResources().getDimensionPixelSize(R.dimen.airline_logo_height);

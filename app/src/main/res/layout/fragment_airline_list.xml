@@ -25,7 +25,7 @@
         android:drawablePadding="6dp"
         android:hint="@string/airline_list_search_hint"
         android:imeOptions="actionDone"
-        android:inputType="textCapWords|textNoSuggestions"
+        android:inputType="textNoSuggestions"
         android:textColor="@color/white"
         android:textColorHint="@color/grey_600"
         android:textCursorDrawable="@drawable/cursor"

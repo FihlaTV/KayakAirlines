@@ -22,7 +22,9 @@ android {
     targetSdkVersion 24
     versionCode 1
     versionName "1.0"
+
     vectorDrawables.useSupportLibrary = true
+    testInstrumentationRunner "util.RxJUnitRunner"
   }
   buildTypes {
     debug {
@@ -85,4 +87,11 @@ dependencies {
   testCompile "com.squareup.okhttp3:mockwebserver:3.3.0"
   testCompile "org.mockito:mockito-core:1.10.19"
   testCompile "org.robolectric:robolectric:3.1.2"
+
+  androidTestCompile "com.android.support:support-annotations:24.2.0"
+  androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
+  androidTestCompile "com.android.support.test.espresso:espresso-intents:2.2.2@aar"
+  androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:2.2.2@aar"
+  androidTestCompile "com.android.support.test.espresso:espresso-contrib:2.2.2@aar"
+  androidTestCompile "com.linkedin.testbutler:test-butler-library:1.0.0"
 }

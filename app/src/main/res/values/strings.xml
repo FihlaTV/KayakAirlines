@@ -6,8 +6,8 @@
 
   <string name="nav_bar_title">Account</string>
 
-  <string name="airline_tab_all">All</string>
-  <string name="airline_tab_starred">Starred</string>
+  <string name="airline_tab_all">ALL</string>
+  <string name="airline_tab_starred">STARRED</string>
   <string name="airline_list_search_hint">Search airlines</string>
   <string name="airline_list_item_text">%1$s (%2$s)</string>
   <string name="airline_item_image_description">Airline logo</string>
