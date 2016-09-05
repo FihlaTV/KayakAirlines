@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <group android:checkableBehavior="single">
+  <group android:id="@+id/group_main">
     <item
-        android:id="@+id/nav_camera"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="Import"
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
         />
     <item
-        android:id="@+id/nav_gallery"
-        android:icon="@drawable/ic_menu_gallery"
-        android:title="Gallery"
+        android:id="@+id/nav_price_alerts"
+        android:icon="@drawable/ic_notifications"
+        android:title="Price Alerts"
         />
     <item
-        android:id="@+id/nav_slideshow"
-        android:icon="@drawable/ic_menu_slideshow"
-        android:title="Slideshow"
+        android:id="@+id/nav_trips"
+        android:icon="@drawable/ic_work"
+        android:title="Trips"
         />
     <item
-        android:id="@+id/nav_manage"
-        android:icon="@drawable/ic_menu_manage"
-        android:title="Tools"
+        android:id="@+id/nav_flight_tracker"
+        android:icon="@drawable/ic_track_changes"
+        android:title="Flight Tracker"
         />
   </group>
 
-  <item android:title="Communicate">
-    <menu>
-      <item
-          android:id="@+id/nav_share"
-          android:icon="@drawable/ic_menu_share"
-          android:title="Share"
-          />
-      <item
-          android:id="@+id/nav_send"
-          android:icon="@drawable/ic_menu_send"
-          android:title="Send"
-          />
-    </menu>
-  </item>
+  <group android:id="@+id/group_extra">
+    <item
+        android:id="@+id/nav_explore"
+        android:icon="@drawable/ic_map"
+        android:title="Explore"
+        />
+    <item
+        android:id="@+id/nav_airline_info"
+        android:icon="@drawable/ic_flight"
+        android:title="Airline Info"
+        />
+    <item
+        android:id="@+id/nav_airport_info"
+        android:icon="@drawable/ic_flight_takeoff"
+        android:title="Airport Information"
+        />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        />
+  </group>
 
 </menu>

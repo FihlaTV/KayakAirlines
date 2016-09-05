@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     >
@@ -16,12 +17,11 @@
     <EditText
         android:id="@+id/airline_list_search"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:layout_marginBottom="4dp"
+        android:layout_weight="1"
         android:background="@null"
-        android:drawableLeft="@drawable/ic_search"
         android:drawablePadding="6dp"
         android:hint="@string/airline_list_search_hint"
         android:imeOptions="actionDone"
@@ -38,8 +38,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:padding="12dp"
-        android:src="@drawable/ic_close"
         android:visibility="invisible"
+        app:srcCompat="@drawable/ic_close"
         tools:visibility="visible"
         />
   </LinearLayout>

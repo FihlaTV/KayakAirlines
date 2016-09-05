@@ -3,6 +3,7 @@ package com.oguzbabaoglu.kayakairlines.features.airlines.list;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,6 +76,11 @@ public class AirlineListFragment extends Fragment implements AirlineListView {
 
     airlineSearchClear.setOnClickListener(click -> presenter.onSearchClearClick());
     airlineSearchText.addTextChangedListener(TextUtil.doAfter(text -> presenter.onFilterTextChanged(text)));
+
+    // Need to load compound drawable from AppCompat for vectors to work
+    airlineSearchText.setCompoundDrawablesWithIntrinsicBounds(
+        AppCompatResources.getDrawable(getContext(), R.drawable.ic_search), null, null, null
+    );
 
     presenter.init();
   }
